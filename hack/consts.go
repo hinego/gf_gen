@@ -5,29 +5,6 @@ import (
 	"strings"
 )
 
-const structTemplateOld = `package {{.VersionName}}
-
-import (
-	"context"
-	"github.com/gogf/gf/v2/frame/g"
-)
-
-
-type I{{.FileName}} interface {
-	{{range .Functions}}{{.Name}}(ctx context.Context, req *{{.Name}}Req) (res *{{.Name}}Res, err error)
-	{{end}}
-}
-
-{{range .Functions}}
-type {{.Name}}Req struct {
-	g.Meta ` + "`path:\"{{.Path}}\" tags:\"{{.Tags}}\" method:\"{{.Method}}\" summary:\"{{.Summary}}\"`" + `
-}
-type {{.Name}}Res struct {
-	g.Meta ` + "`mime:\"{{.Mime}}\" example:\"{{.Default}}\"`" + `
-}
-{{end}}
-`
-
 const structInterface = `package {{.VersionName}}
 
 import (
